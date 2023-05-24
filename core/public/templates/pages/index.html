@@ -1,0 +1,180 @@
+{% load static tailwind_tags %}
+{% load static %}
+{% load humanize %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--######################################################################-->
+    <!-- Webpage/Metadas ==================================================== -->
+    <title>Pajoy-Tours</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'ico/favicon.png' %}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="¡Tours Colombia!">
+    <meta name="author" content="Pajoy-Tours">
+    <meta name="keywords" content="">
+    <!--######################################################################-->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- FontAwensome/Tailwind ==================================================== -->
+    {% tailwind_css %}
+    <link rel="stylesheet" href="{% static 'fonts/MikeSamiya-EadMr.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css">
+    <!-- OwlCarousel ============================================================== -->
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+</head>
+<body>
+    <!--######################################################################-->
+    <!-- Header/section ==================================================== -->
+    <header>
+      <nav class="fixed top-0 left-0 right-0 z-10">
+        <div class="flex flex-row items-center justify-between px-12 py-2">
+            <div class="flex flex-row items-center">
+                <a href="/"><img src="{% static 'img/icon.png' %}" alt="" class="w-12 h-12"></a>
+                <p class="text-2xl font-samiya">Pajoy-Tours</p>
+            </div>
+            <div class="text-gray-200 uppercase font-bold">
+              <ul class="flex space-x-8">
+                <li><a href="{% url 'About' %}">¿Quienes Somos?</a></li>
+                <li><a href="{% url 'Tours' %}">Tours</a></li>
+                <li><a href="{% url 'Index' %}">Inicio</a></li>
+              </ul>
+            </div>
+        </div>
+      </nav>
+      <div>
+        <div id="myDiv" class="fixed top-0 left-0 right-0 z-10 opacity-0 transition-opacity duration-700">
+          <div class="flex flex-row items-center justify-between px-12 py-2 bg-gradient-to-r from-pajoy0 to-pajoy4">
+              <div class="flex flex-row items-center">
+                <a href="/"><img src="{% static 'img/icon.png' %}" alt="" class="w-12 h-12"></a>
+                <p class="text-2xl font-samiya text-gray-100">Pajoy-Tours</p>
+              </div>
+              <div class="text-gray-100 uppercase font-bold">
+                <ul class="flex space-x-8">
+                  <li><a href="{% url 'About' %}">¿Quienes Somos?</a></li>
+                  <li><a href="{% url 'Tours' %}">Tours</a></li>
+                  <li><a href="{% url 'Index' %}">Inicio</a></li>
+                </ul>
+              </div>
+          </div>
+        </div>
+        <div class="flex flex-row items-center fond01">
+          <div class="flex flex-col justify-start my-36 ml-16 items-center">
+            <p class="text-8xl font-samiya text-pajoy1 text-center">Pajoy-Tours</p>
+            <div class="flex flex-row uppercase gap-x-4 items-center mt-12 justify-start">
+              <p class="">Una forma diferente de emprender un viaje</p>
+              <a class="rounded-full cursor-pointer bg-gray-600 text-gray-100 w-32 py-2 text-center uppercase">CONTACTAR</a>
+            </div>
+          </div>
+        </div>
+        <div class="w-1/3"></div>
+      </div>
+    </header>
+    <!--################################################################################-->
+    <!----><div class="flex justify-center"><hr class="w-96 divider gradient"></div><!---->
+    <!-- Content/section ===============================================================-->
+    <section>
+      <p class="text-center text-4xl mt-8">¡POPULARES!</p>
+      <p class="">¡Imperdibles destinos turisticos!</p>
+      <div class="grid place-items-center h-screen mt-2 ml-12 overflow-hidden">
+        <div class="owl-carousel">
+          {% if iTour %}
+            {% for i in iTour %}
+            <article class="card text-white">
+              <img class="card__background" src="{{i.banner.url}}" alt="" width="1920" height="1693"/>
+              <div class="card__content | flow">
+                <div class="card__content--container | flow">
+                  <h2 class="card__title uppercase">{{i.name}}</h2>
+                  <p class="card__description">{{i.description}}</p>
+                </div>
+              </div>
+            </article>
+            {% endfor %}
+          {% else %}
+            {% for _ in '12345' %}
+            <article class="card">
+              <img class="card__background" src="https://i.imgur.com/QYWAcXk.jpeg" alt="" width="1920" height="1693"/>
+              <div class="card__content | flow">
+                <div class="card__content--container | flow">
+                  <h2 class="card__title">Lorem ipsum</h2>
+                  <p class="card__description">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum in labore laudantium deserunt fugiat numquam.
+                  </p>
+                </div>
+              </div>
+            </article>
+            {% endfor %}
+          {% endif %}
+        </div>
+        <script src="{% static 'js/owl.carousel.js' %}"></script>
+      </div>
+    </section>
+    <section>
+      <div class="flex justify-center my-16">
+        <img src="{{iSettings.post1_banner.url}}" class="h-96 w-full md:w-auto md:mr-4" alt="">
+        <img src="{{iSettings.post2_banner.url}}" class="h-96 w-full md:w-auto md:ml-4" alt="">
+        <img src="{{iSettings.post3_banner.url}}" class="h-96 w-full md:w-auto md:ml-4" alt="">
+      </div>
+    </section>
+    <section>
+      <div class="flex flex-col justify-center items-center my-16">
+        <p class="text-3xl">MEDIOS DE PAGO</p>
+        <p class="">¡Paga seguro aqui!</p>
+        <!--###########--><hr class="mb-10 w-96 divider gradient"><!--###########-->
+        <div class="flex flex-row justify-center items-center">
+          <img src="{% static 'img/payments/bancolombia.webp' %}" alt="" class="w-32 h-32">
+          <img src="{% static 'img/payments/daviplata.webp' %}" alt="" class="w-32 h-32">
+          <img src="{% static 'img/payments/nequi.webp' %}" alt="" class="w-32 h-32">
+        </div>
+      </div>      
+    </section>
+    <!--######################################################################-->
+    <!--###########--><hr class="mt-10 mx-10 divider gradient"><!--###########-->
+    <!-- Footer/section ===================================================== -->
+    <footer>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 items-center bg-neutral-800 py-2 px-8">
+        <div class="flex flex-row">
+          <img src="{% static 'img/icon.png' %}" class="h-16" />
+          <div class="flex flex-col justify-center">
+            <p class="text-gray-200 text-left ml-4">PAJOY-TOURS</p>
+            <p class="text-gray-400 text-left ml-4 text-xs">mail@pajouytours.com</p>
+          </div>
+        </div>
+        <div class="flex flex-row gap-4 items-center">
+          <div class="flex flex-col text-xs">
+            <p class="text-gray-200 uppercase">Contactanos</p>
+            <p class="text-gray-400">WhatsApp: +573208820423</p>
+          </div>
+          <div>
+            <button class="bg-gray-500 hover:bg-gray-600 text-gray-200 font-bold py-2 px-4 rounded-md text-xs max-w-fit">CHAT</button>
+          </div>
+        </div>
+        <div class="flex flex-row gap-4 whitespace-nowrap items-center">
+          <div class="flex flex-col text-xs">
+            <p class="text-gray-200 uppercase">Atencion</p>
+            <p class="text-gray-400 text-left text-xs">L-S 8-12m/2-6pm</p>
+          </div>
+          <div class="text-gray-400 text-left text-xs">
+            <p>Cra-7 15-20 Chinchiná</p>
+            <p>Cra-23 53-55 Av.Santander Manizales</p>
+          </div>
+        </div>
+        <div class="flex flex-row items-center space-x-2 justify-end">
+          <p class="w-8 h-8 rounded-full bg-gray-200"><i class="p-2 fab fa-facebook"></i></p>
+          <p class="w-8 h-8 rounded-full bg-gray-200"><i class="p-2 fab fa-instagram"></i></p>
+          <p class="w-8 h-8 rounded-full bg-gray-200"><i class="p-2 fab fa-tiktok"></i></p>
+          <p class="w-8 h-8 rounded-full bg-gray-200"><i class="p-2 fab fa-twitter"></i></p>
+        </div>
+      </div>
+    </footer>    
+    <!--######################################################################-->
+    <!--######################################################################-->
+    <script src="{% static 'js/navbar.js' %}"></script>
+</body>
+</html>
+

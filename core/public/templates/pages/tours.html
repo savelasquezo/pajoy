@@ -1,0 +1,177 @@
+
+{% load static tailwind_tags %}
+{% load static %}
+{% load humanize %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--######################################################################-->
+    <!-- Webpage/Metadas ==================================================== -->
+    <title>Pajoy-Tours</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'ico/favicon.png' %}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="¡Tours Colombia!">
+    <meta name="author" content="Pajoy-Tours">
+    <meta name="keywords" content="">
+    <!--######################################################################-->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- FontAwensome/Tailwind ==================================================== -->
+    {% tailwind_css %}
+    <link rel="stylesheet" href="{% static 'fonts/MikeSamiya-EadMr.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css">
+</head>
+<body>
+    <!--######################################################################-->
+    <!-- Header/section ==================================================== -->
+    <header>
+      <nav class="fixed top-0 left-0 right-0 z-10">
+        <div class="flex flex-row items-center justify-between px-12 py-2">
+            <div class="flex flex-row items-center">
+                <a href="/"><img src="{% static 'img/icon.png' %}" alt="" class="w-12 h-12"></a>
+                <p class="text-2xl font-samiya">Pajoy-Tours</p>
+            </div>
+            <div class="text-gray-200 uppercase font-bold">
+              <ul class="flex space-x-8">
+                <li><a href="{% url 'About' %}">¿Quienes Somos?</a></li>
+                <li><a href="{% url 'Tours' %}">Tours</a></li>
+                <li><a href="{% url 'Index' %}">Inicio</a></li>
+              </ul>
+            </div>
+        </div>
+      </nav>
+      <div>
+        <div id="myDiv" class="fixed top-0 left-0 right-0 z-10">
+          <div class="flex flex-row items-center justify-between px-12 py-2 bg-gradient-to-r from-pajoy0 to-pajoy4">
+              <div class="flex flex-row items-center">
+                <a href="/"><img src="{% static 'img/icon.png' %}" alt="" class="w-12 h-12"></a>
+                <p class="text-2xl font-samiya text-gray-100">Pajoy-Tours</p>
+              </div>
+              <div class="text-gray-100 uppercase font-bold">
+                <ul class="flex space-x-8">
+                  <li><a href="{% url 'About' %}">¿Quienes Somos?</a></li>
+                  <li><a href="{% url 'Tours' %}">Tours</a></li>
+                  <li><a href="{% url 'Index' %}">Inicio</a></li>
+                </ul>
+              </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!--######################################################################-->
+    <!--###########--><hr class="mt-10 mx-10 divider gradient"><!--###########-->
+    <!-- Content/section =====================================================-->
+    <section>
+      <div class="flex flex-wrap justify-center">
+      {% if iTour %}
+        {% for i in iTour %}
+        <div class="flex flex-col m-10">
+          <a class="imgover" href=""><img class="object-cover rounded-t-md h-80 card_img" src="{{i.banner.url}}" alt=""></a>
+          <div class="justify-between rounded-b-md py-4 bg-slate-900 text-sm text-gray-200 font-family px-5">
+            <div class="flex flex-row justify-between">
+              <span>{{i.name}}</span>
+              <span>{{i.date|date:"d/m/Y"}}<i class="fa-solid fa-calendar-days ml-2"></i></i></span>
+            </div>
+            <div class="flex flex-row justify-between mt-2">
+              <a target="blank" href=""><i class="fas fa-map-marker-alt pr-2 text-orange-400"></i>{{i.location}}</a>
+              <span>{{i.price|intcomma}} $COP</span>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        {% for _ in '123' %}
+        <div class="flex flex-col m-10">
+          <a class="imgover" href=""><img class="object-cover rounded-t-md h-80" src="https://i.imgur.com/QYWAcXk.jpeg" alt=""></a>
+          <div class="justify-between rounded-b-md py-4 bg-slate-900 text-sm text-gray-200 font-family px-5">
+            <div class="flex flex-row justify-between">
+              <span>Cartagena</span>
+              <span>01-01-2000<i class="fa-solid fa-calendar-days ml-2"></i></i></span>
+            </div>
+            <div class="flex flex-row justify-between mt-2">
+              <a target="blank" href=""><i class="fas fa-map-marker-alt pr-2 text-orange-400"></i>Santa Marta</a>
+              <span>($COP)|intcomma</span>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      {% endif %}
+      {% if iTour.has_other_pages %}
+      <nav class="pagination block w-full text-center clear-both">
+        <ul>
+          {% if iTour.has_previous %}
+              <li class="inline-block mx-2 last:mr-0"><a class="block border bg-clip-padding font-normal" 
+                href="?page={{ iTour.previous_page_number }}">&laquo;</a></li>
+          {% else %}
+              <li class="inline-block last:mr-0"><a class="block border bg-clip-padding font-normal"
+                href="">&laquo;</a></li>
+          {% endif %}
+          {% for page in iTour.paginator.page_range %}
+              {% if page == iTour.number %}
+              <li class="inline-block mx-2 last:mr-0 text-gray-600">
+                <a class="block border bg-clip-padding font-normal"href="">{{ page }}</a></li>
+              {% else %}
+              <li class="inline-block mx-2 last:mr-0"><a class="block border bg-clip-padding font-normal"
+                    href="?page={{ page }}">{{ page }}</a></li>
+              {% endif %}
+          {% endfor %}
+          {% if iTour.has_next %}
+              <li class="inline-block mx-2 last:mr-0 "><a class="block border bg-clip-padding font-normal"
+                href="?page={{ iTour.next_page_number }}">&raquo;</a></li>
+          {% else %}
+              <li class="inline-block last:mr-0"><a class="block border bg-clip-padding font-normal"
+                href="">&raquo;</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+      {% endif %}
+      </div>
+    </section>
+    <!--######################################################################-->
+    <!--###########--><hr class="mt-10 mx-10 divider gradient"><!--###########-->
+    <!-- Footer/section ===================================================== -->
+    <footer>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 items-center bg-neutral-800 py-2 px-8">
+        <div class="flex flex-row">
+          <img src="{% static 'img/icon.png' %}" class="h-16" />
+          <div class="flex flex-col justify-center">
+            <p class="text-gray-200 text-left ml-4">PAJOY-TOURS</p>
+            <p class="text-gray-400 text-left ml-4 text-xs">mail@pajouytours.com</p>
+          </div>
+        </div>
+        <div class="flex flex-row gap-4 items-center">
+          <div class="flex flex-col text-xs">
+            <p class="text-gray-200 uppercase">Contactanos</p>
+            <p class="text-gray-400">WhatsApp: +573208820423</p>
+          </div>
+          <div>
+            <button class="bg-gray-500 hover:bg-gray-600 text-gray-200 font-bold py-2 px-4 rounded-md text-xs max-w-fit">CHAT</button>
+          </div>
+        </div>
+        <div class="flex flex-row gap-4 whitespace-nowrap items-center">
+          <div class="flex flex-col text-xs">
+            <p class="text-gray-200 uppercase">Atencion</p>
+            <p class="text-gray-400 text-left text-xs">L-S 8-12m/2-6pm</p>
+          </div>
+          <div class="text-gray-400 text-left text-xs">
+            <p>Cra-7 15-20 Chinchiná</p>
+            <p>Cra-23 53-55 Av.Santander Manizales</p>
+          </div>
+        </div>
+        <div class="flex flex-row items-center space-x-2 justify-end">
+          <p class="w-8 h-8 rounded-full bg-gray-200"><i class="p-2 fab fa-facebook"></i></p>
+          <p class="w-8 h-8 rounded-full bg-gray-200"><i class="p-2 fab fa-instagram"></i></p>
+          <p class="w-8 h-8 rounded-full bg-gray-200"><i class="p-2 fab fa-tiktok"></i></p>
+          <p class="w-8 h-8 rounded-full bg-gray-200"><i class="p-2 fab fa-twitter"></i></p>
+        </div>
+      </div>
+    </footer>    
+    <!--######################################################################-->
+    <!--######################################################################-->
+    <script src="{% static 'js/navbar.js' %}"></script>
+</body>
+</html>
+

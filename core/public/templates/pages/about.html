@@ -1,0 +1,104 @@
+{% load static tailwind_tags %}
+{% load static %}
+{% load humanize %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--######################################################################-->
+    <!-- Webpage/Metadas ==================================================== -->
+    <title>Pajoy-Tours</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'ico/favicon.png' %}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="¡Tours Colombia!">
+    <meta name="author" content="Pajoy-Tours">
+    <meta name="keywords" content="">
+    <!--######################################################################-->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- FontAwensome/Tailwind ==================================================== -->
+    {% tailwind_css %}
+    <link rel="stylesheet" href="{% static 'fonts/MikeSamiya-EadMr.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css">
+</head>
+<body>
+    <!--######################################################################-->
+    <!-- Header/section ==================================================== -->
+    <header>
+        <div class="fixed top-0 left-0 right-0 z-10">
+            <div class="flex flex-row items-center justify-between px-12 py-2 bg-gradient-to-r from-pajoy0 to-pajoy4">
+                <div class="flex flex-row items-center">
+                <a href="/"><img src="{% static 'img/icon.png' %}" alt="" class="w-12 h-12"></a>
+                <p class="text-2xl font-samiya text-gray-100">Pajoy-Tours</p>
+                </div>
+                <div class="text-gray-100 uppercase font-bold">
+                <ul class="flex space-x-8">
+                  <li><a href="{% url 'About' %}">¿Quienes Somos?</a></li>
+                  <li><a href="{% url 'Tours' %}">Tours</a></li>
+                  <li><a href="{% url 'Index' %}">Inicio</a></li>
+                </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--######################################################################-->
+    <!--###########--><hr class="mt-10 mx-10 divider gradient"><!--###########-->
+    <!-- Content/section =====================================================-->
+    <section>
+      <div class="mt-20 ml-16 h-full overflow-hidden">
+        <p class="pl-8 text-6xl font-samiya">Pajoy-Tours</p>
+        <p class="pl-12 pr-40 mt-12 text-justify text-lg">La empresa de turismo tiene como misión satisfacer las necesidades y expectativas de los clientes, 
+          Pajoy Tours te ofrece paquetes turísticos personalizados que se adapten a sus intereses y presupuesto.
+          Para lograrlo, cuenta con un equipo de profesionales capacitados en la industria del turismo, 
+          que se encarga de planificar, coordinar y supervisar cada aspecto del viaje.Además, 
+          la empresa de turismo se preocupa por la sostenibilidad y el impacto social y ambiental de sus operaciones.<br><br>
+          Trabaja en colaboración con proveedores locales y promueve el turismo responsable, respetando 
+          las culturas y los ecosistemas de los destinos turísticos que visita.</p>
+      </div>
+    </section>
+    <!--######################################################################-->
+    <!--###########--><hr class="mt-10 mx-10 divider gradient"><!--###########-->
+    <!-- Footer/section ===================================================== -->
+    <footer>
+      <div class="fixed bottom-0 left-0 right-0 z-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 items-center bg-neutral-800 py-2 px-8">
+        <div class="flex flex-row">
+          <img src="{% static 'img/icon.png' %}" class="h-16" />
+          <div class="flex flex-col justify-center">
+            <p class="text-gray-200 text-left ml-4">PAJOY-TOURS</p>
+            <p class="text-gray-400 text-left ml-4 text-xs">mail@pajouytours.com</p>
+          </div>
+        </div>
+        <div class="flex flex-row gap-4 items-center">
+          <div class="flex flex-col text-xs">
+            <p class="text-gray-200 uppercase">Contactanos</p>
+            <p class="text-gray-400">WhatsApp: +573208820423</p>
+          </div>
+          <div>
+            <button class="bg-gray-500 hover:bg-gray-600 text-gray-200 font-bold py-2 px-4 rounded-md text-xs max-w-fit">CHAT</button>
+          </div>
+        </div>
+        <div class="flex flex-row gap-4 whitespace-nowrap items-center">
+          <div class="flex flex-col text-xs">
+            <p class="text-gray-200 uppercase">Atencion</p>
+            <p class="text-gray-400 text-left text-xs">L-S 8-12m/2-6pm</p>
+          </div>
+          <div class="text-gray-400 text-left text-xs">
+            <p>Cra-7 15-20 Chinchiná</p>
+            <p>Cra-23 53-55 Av.Santander Manizales</p>
+          </div>
+        </div>
+        <div class="flex flex-row items-center space-x-2 justify-end">
+          <p class="w-8 h-8 rounded-full bg-gray-200"><i class="p-2 fab fa-facebook"></i></p>
+          <p class="w-8 h-8 rounded-full bg-gray-200"><i class="p-2 fab fa-instagram"></i></p>
+          <p class="w-8 h-8 rounded-full bg-gray-200"><i class="p-2 fab fa-tiktok"></i></p>
+          <p class="w-8 h-8 rounded-full bg-gray-200"><i class="p-2 fab fa-twitter"></i></p>
+        </div>
+      </div>
+    </footer>    
+    <!--######################################################################-->
+    <!--######################################################################-->
+</body>
+</html>
+
